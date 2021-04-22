@@ -1,4 +1,4 @@
-defmodule Inmana.Restaurant.Create do
+defmodule Inmana.Restaurants.Create do
   alias Inmana.{Repo, Restaurant}
 
   def call(params) do
