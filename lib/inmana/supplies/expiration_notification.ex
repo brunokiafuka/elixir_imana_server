@@ -5,11 +5,14 @@ defmodule Imana.Supplies.ExpirationNotification do
   def send do
     data = GetByExpiration.call()
     # this retuns a map where emails is set as key
+    data
+    |> Task.async_stream(fn {key, values} -> send_email(key, values) end)
+    |> Stream.run()
+  end
 
-    Enum.each(data, fn {key, values} ->
-      key
-      |> ExpirationEmail.create(values)
-      |> Mailer.deliver_later!()
-    end)
+  defp send_email(email_to, supply) do
+    email_to
+    |> ExpirationEmail.create(supply)
+    |> Mailer.deliver_later!()
   end
 end
