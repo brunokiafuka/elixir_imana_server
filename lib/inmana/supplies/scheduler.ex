@@ -1,6 +1,6 @@
 defmodule Inmana.Supplies.Scheduler do
   use GenServer
-  alias Imana.Supplies.ExpirationNotification
+  alias Inmana.Supplies.ExpirationNotification
 
   # client
   def start_link(_state) do
